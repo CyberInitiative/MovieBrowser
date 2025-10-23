@@ -1,6 +1,10 @@
 package com.miroslav.levdikov.moviebrowser.ui.composable.navigation
 
-import android.util.Log
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Icon
@@ -12,9 +16,6 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination
@@ -117,8 +118,8 @@ private fun BottomNavigation(
                 },
                 icon = {
                     Icon(
-                        if (isSelected) destination.selectedIcon else destination.unselectedIcon,
-                        contentDescription = destination.contentDescription,
+                        imageVector = destination.selectedIcon,
+                        contentDescription = destination.contentDescription
                     )
                 },
                 colors = NavigationBarItemDefaults.colors(

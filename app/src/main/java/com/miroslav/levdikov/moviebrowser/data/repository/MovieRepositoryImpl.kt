@@ -13,10 +13,15 @@ class MovieRepositoryImpl(
 
     override suspend fun getPopularMovies(language: String, page: Int): List<MovieModel> {
         return withContext(coroutineDispatcher) {
-            movieService.getPopularMovies(
-                language = language,
-                page = page,
-            ).results.map { movieDto -> movieDto.mapToModel() }
+            try {
+                movieService.getPopularMovies(
+                    language = language,
+                    page = page,
+                ).results.map { movieDto -> movieDto.mapToModel() }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                emptyList()
+            }
         }
     }
 }

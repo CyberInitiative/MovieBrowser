@@ -32,7 +32,7 @@ fun PopularMoviesScreen(
     val isMoviesLoading by viewModel.moviesLoadingState.collectAsStateWithLifecycle()
 
     PopularMoviesContent(
-        movieModels = movies,
+        movies = movies,
         isMoviesLoading = isMoviesLoading,
         modifier = modifier,
         onAddToFavorites = viewModel::setFavoriteStatus,
@@ -42,21 +42,28 @@ fun PopularMoviesScreen(
 
 @Composable
 private fun PopularMoviesContent(
-    movieModels: List<MovieModel>,
+    movies: List<MovieModel>,
     isMoviesLoading: Boolean,
     modifier: Modifier = Modifier,
     onAddToFavorites: (MovieModel) -> Unit,
     onNavigateToDetails: (Int) -> Unit,
 ) {
     if (!isMoviesLoading) {
-        MoviesList(
-            movieModels = movieModels,
-            modifier = modifier
-                .padding(horizontal = 10.dp)
-                .padding(vertical = 15.dp),
-            onFavoriteButtonClick = onAddToFavorites,
-            onNavigateToDetails = onNavigateToDetails,
-        )
+        if (movies.isNotEmpty()) {
+            MoviesList(
+                movieModels = movies,
+                modifier = modifier
+                    .padding(horizontal = 10.dp)
+                    .padding(vertical = 15.dp),
+                onFavoriteButtonClick = onAddToFavorites,
+                onNavigateToDetails = onNavigateToDetails,
+            )
+        } else {
+            NoDataPlaceHolder(
+                text = "Popular movies list is empty.",
+                modifier = Modifier.fillMaxSize(),
+            )
+        }
     } else {
         ListLoadingIndicator(modifier = Modifier.fillMaxSize())
     }

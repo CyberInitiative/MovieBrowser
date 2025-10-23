@@ -77,7 +77,10 @@ private fun DetailsScreenContent(
             onFavoriteButtonClick = onFavoriteButtonClick
         )
     } else {
-        NoMovieDetails(modifier = Modifier.fillMaxSize())
+        NoDataPlaceHolder(
+            text = "No details for this movie.",
+            modifier = Modifier.fillMaxSize()
+        )
     }
 }
 
@@ -174,17 +177,6 @@ private fun PosterAndFavoriteButton(
                     top.linkTo(imageRef.top)
                 },
             iconSize = 32.dp
-        )
-    }
-}
-
-@Composable
-private fun NoMovieDetails(modifier: Modifier = Modifier) {
-    Box(modifier = modifier) {
-        Text(
-            text = "No details for this movie.",
-            color = MaterialTheme.colorScheme.onSurfaceVariant,
-            style = MaterialTheme.typography.bodySmall
         )
     }
 }

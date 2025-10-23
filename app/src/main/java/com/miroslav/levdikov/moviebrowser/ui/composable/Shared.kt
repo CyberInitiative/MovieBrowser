@@ -204,3 +204,20 @@ private fun MovieItemTitleAndOverview(
         )
     }
 }
+
+@Composable
+fun NoDataPlaceHolder(
+    text: String,
+    modifier: Modifier = Modifier
+) {
+    Box(
+        modifier = modifier,
+        contentAlignment = Alignment.Center
+    ) {
+        Text(
+            text = text,
+            color = MaterialTheme.colorScheme.onSurfaceVariant,
+            style = MaterialTheme.typography.bodySmall
+        )
+    }
+}
